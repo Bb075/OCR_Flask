@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Importer un contrat{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form id="upload-form" method="post" enctype="multipart/form-data" action="{{ url_for('contract.upload') }}">
+    <div class="form-group">
+      <label for="file">Sélectionnez un fichier :</label>
+      <input type="file" name="file" id="file" class="form-control-file">
+      <small class="form-text text-muted">Formats acceptés : PDF, DOCX, JPG, PNG. Taille maximale : 10 Mo.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Importer</button>
+  </form>
+
+  <script>
+    document.getElementById('upload-form').addEventListener('submit', function(event) {
+      const fileInput = document.getElementById('file');
+      if (!fileInput.files.length) {
+        event.preventDefault();
+        alert('Veuillez sélectionner un fichier.');
+      }
+    });
+  </script>
+{% endblock %}
